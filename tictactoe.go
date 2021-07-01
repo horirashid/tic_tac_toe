@@ -46,6 +46,31 @@ func (b *Board) print() {
 	}
 }
 
+func (b *Board) isTripleEqual(a int, b int, c int) bool {
+	return (b.tokens[a] == b.tokens[b]) && (b.tokens[a] == b.tokens[c])
+}
+
+func (b *Board) check() bool {
+	if isTripleEqual(0, 1, 2) {
+		return true
+	} else if isTripleEqual(0, 1, 2) {
+		return true
+	} else if isTripleEqual(0, 1, 2) {
+		return true
+	} else if isTripleEqual(0, 1, 2) {
+		return true
+	} else if isTripleEqual(0, 1, 2) {
+		return true
+	} else if isTripleEqual(0, 1, 2) {
+		return true
+	} else if isTripleEqual(0, 1, 2) {
+		return true
+	} else if isTripleEqual(0, 1, 2) {
+		return true
+	}
+	return false
+}
+
 func main() {
 	b := &Board{
 		tokens: []int{0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -59,10 +84,11 @@ func main() {
 		fmt.Fscanf(r, "%d,%d\n", &x, &y)
 		b.put(y, x, s) //reverse x and y
 
-		//xxxxxxxxxxxxxxxxxxxxxx
-		// TODO -try to output the whole board here instead of just current cell
-		//fmt.Printf("%s\n", b.get(x, y))
 		b.print()
+
+		if b.check() == true {
+			Printf("%s won", p)
+		}
 
 		// swap players
 		if s == "o" {
