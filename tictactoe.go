@@ -30,6 +30,22 @@ func (b *Board) get(x, y int) string {
 	}
 	return "."
 }
+
+func (b *Board) print() {
+	for j := 0; j < 3; j++ {
+		for i := 0; i < 3; i++ {
+			if b.tokens[j*3+i] == 1 {
+				fmt.Printf("o")
+			} else if b.tokens[j*3+i] == 2 {
+				fmt.Printf("x")
+			} else {
+				fmt.Printf(".")
+			}
+		}
+		fmt.Println()
+	}
+}
+
 func main() {
 	b := &Board{
 		tokens: []int{0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -43,8 +59,10 @@ func main() {
 		fmt.Fscanf(r, "%d,%d\n", &x, &y)
 		b.put(x, y, s)
 
+		//xxxxxxxxxxxxxxxxxxxxxx
 		// TODO -try to output the whole board here instead of just current cell
-		fmt.Printf("%s\n", b.get(x, y))
+		//fmt.Printf("%s\n", b.get(x, y))
+		b.print()
 
 		// swap players
 		if s == "o" {
