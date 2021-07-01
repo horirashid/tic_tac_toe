@@ -46,26 +46,26 @@ func (b *Board) print() {
 	}
 }
 
-func (b *Board) isTripleEqual(a int, b int, c int) bool {
-	return (b.tokens[a] == b.tokens[b]) && (b.tokens[a] == b.tokens[c])
+func (b *Board) isTripleEqual(x int, y int, z int) bool {
+	return (b.tokens[x] == b.tokens[y]) && (b.tokens[x] == b.tokens[z]) && b.tokens[x] != 0
 }
 
 func (b *Board) check() bool {
-	if isTripleEqual(0, 1, 2) {
+	if b.isTripleEqual(0, 1, 2) {
 		return true
-	} else if isTripleEqual(0, 1, 2) {
+	} else if b.isTripleEqual(3, 4, 5) {
 		return true
-	} else if isTripleEqual(0, 1, 2) {
+	} else if b.isTripleEqual(6, 7, 8) {
 		return true
-	} else if isTripleEqual(0, 1, 2) {
+	} else if b.isTripleEqual(0, 3, 6) {
 		return true
-	} else if isTripleEqual(0, 1, 2) {
+	} else if b.isTripleEqual(1, 4, 7) {
 		return true
-	} else if isTripleEqual(0, 1, 2) {
+	} else if b.isTripleEqual(2, 5, 8) {
 		return true
-	} else if isTripleEqual(0, 1, 2) {
+	} else if b.isTripleEqual(0, 4, 8) {
 		return true
-	} else if isTripleEqual(0, 1, 2) {
+	} else if b.isTripleEqual(2, 4, 6) {
 		return true
 	}
 	return false
@@ -79,7 +79,8 @@ func main() {
 	s := "o"
 	var x, y int
 	var r = bufio.NewReader(os.Stdin)
-	for true {
+	var step int
+	for step = 0; step < 9; step++ {
 		fmt.Printf("%s: Input (x,y) ", p)
 		fmt.Fscanf(r, "%d,%d\n", &x, &y)
 		b.put(y, x, s) //reverse x and y
@@ -87,7 +88,8 @@ func main() {
 		b.print()
 
 		if b.check() == true {
-			Printf("%s won", p)
+			fmt.Println("%s won", p)
+			break
 		}
 
 		// swap players
@@ -98,6 +100,9 @@ func main() {
 			s = "o"
 			p = "Player1"
 		}
+	}
+	if step == 9 {
+		fmt.Println("Draw")
 	}
 }
 
