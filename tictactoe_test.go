@@ -1,4 +1,3 @@
-git
 package main
 
 import "testing"
