@@ -57,7 +57,7 @@ func main() {
 	for true {
 		fmt.Printf("%s: Input (x,y) ", p)
 		fmt.Fscanf(r, "%d,%d\n", &x, &y)
-		b.put(x, y, s)
+		b.put(y, x, s) //reverse x and y
 
 		//xxxxxxxxxxxxxxxxxxxxxx
 		// TODO -try to output the whole board here instead of just current cell
