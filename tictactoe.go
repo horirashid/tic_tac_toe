@@ -88,7 +88,7 @@ func main() {
 		b.print()
 
 		if b.check() == true {
-			fmt.Println("%s won", p)
+			fmt.Printf("%s won\n", p)
 			break
 		}
 
