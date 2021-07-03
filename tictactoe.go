@@ -10,15 +10,16 @@ type Board struct {
 	tokens []int // tokens[0] -> (0,0), tokens[1] -> (0,1), ...
 }
 
-func (b *Board) put(x, y int, u string) {
+func (b *Board) put(x, y int, u string) bool {
 	if b.tokens[x+3*y] == 0 {
 		if u == "o" {
 			b.tokens[x+3*y] = 1
 		} else if u == "x" {
 			b.tokens[x+3*y] = 2
 		}
+		return true
 	} else {
-		fmt.Println("This cell is occupied!")
+		return false
 	}
 }
 
@@ -34,13 +35,14 @@ func (b *Board) get(x, y int) string {
 func (b *Board) print() {
 	for j := 0; j < 3; j++ {
 		for i := 0; i < 3; i++ {
-			if b.tokens[j*3+i] == 1 {
+			/*if b.tokens[j*3+i] == 1 {
 				fmt.Printf("o")
 			} else if b.tokens[j*3+i] == 2 {
 				fmt.Printf("x")
 			} else {
 				fmt.Printf(".")
-			}
+			}*/
+			fmt.Printf("%s",b.get(j,i))
 		}
 		fmt.Println()
 	}
@@ -83,9 +85,16 @@ func main() {
 	for step = 0; step < 9; step++ {
 		fmt.Printf("%s: Input (x,y) ", p)
 		fmt.Fscanf(r, "%d,%d\n", &x, &y)
-		b.put(y, x, s) //reverse x and y
-
+		success := b.put(y, x, s) //reverse x and y
 		b.print()
+		// if cell is occupied, ask the same player to make input again
+		for (!success) {
+			fmt.Println("This cell is occupied! Try again")
+			fmt.Printf("%s: Input (x,y) ", p)
+			fmt.Fscanf(r, "%d,%d\n", &x, &y)
+			success = b.put(y, x, s)
+			b.print()
+		}
 
 		if b.check() == true {
 			fmt.Printf("%s won\n", p)
